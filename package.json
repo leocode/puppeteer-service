@@ -1,0 +1,12 @@
+{
+  "name": "puppeteer-service",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node api/index.js",
+    "start:docker": "docker run --rm -it -p 3000:3000 $(docker build -q .)"
+  },
+  "dependencies": {
+    "fastify": "^3.14.0",
+    "puppeteer": "^8.0.0"
+  }
+}
