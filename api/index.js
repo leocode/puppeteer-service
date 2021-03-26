@@ -1,5 +1,5 @@
-const puppeteer = require('puppeteer');
 const { config } = require('./config');
+const { htmlToPdf } = require('./puppeteer');
 
 const fastify = require('fastify')({
   logger: true,
@@ -17,9 +17,10 @@ const pdfRequest = {
   }
 }
 
+fastify.post('/pdf', pdfRequest, async (request) => {
+  const html = request.body.html;
 
-fastify.post('/pdf', pdfRequest, async (request, reply) => {
-  return { hello: request.body.html };
+  return htmlToPdf(html);
 });
 
 (async () => {
