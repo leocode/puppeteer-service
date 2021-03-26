@@ -22,7 +22,7 @@ const htmlToPdf = async (html) => {
     const page = await browser.newPage();
     await page.setContent(html);
 
-    return await page.pdf({ format: 'A4' });
+    return await page.pdf({ format: 'A4', printBackground: true });
   })
 }
 
