@@ -24,7 +24,7 @@ services:
 
 Starting container automatically starts API server.
 
-It listens on `PORT` env variable (default 3000).
+It listens on port 3000
 
 ### HTML to PDF
 
