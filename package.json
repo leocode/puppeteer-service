@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-service",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "start": "docker run --rm -it -p 3000:3000 $(docker build -q .)"
   },
