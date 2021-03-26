@@ -1,21 +1,10 @@
 const { config } = require('./config');
 const { htmlToPdf } = require('./puppeteer');
+const { htmlPdfRequest } = require('./schemas');
 
 const fastify = require('fastify')({
   logger: true,
 });
-
-const htmlPdfRequest = {
-  schema: {
-    body: {
-      type: 'object',
-      required: ['html'],
-      properties: {
-        html: { type: 'string' },
-      }
-    }
-  }
-}
 
 fastify.post('/html/pdf', htmlPdfRequest, async (request) => {
   const html = request.body.html;
