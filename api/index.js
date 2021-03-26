@@ -5,7 +5,7 @@ const fastify = require('fastify')({
   logger: true,
 });
 
-const pdfRequest = {
+const htmlPdfRequest = {
   schema: {
     body: {
       type: 'object',
@@ -17,7 +17,7 @@ const pdfRequest = {
   }
 }
 
-fastify.post('/pdf', pdfRequest, async (request) => {
+fastify.post('/html/pdf', htmlPdfRequest, async (request) => {
   const html = request.body.html;
 
   return htmlToPdf(html);
