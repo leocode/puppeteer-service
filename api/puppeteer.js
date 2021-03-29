@@ -1,7 +1,8 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 
 const inBrowser = async (cb) => {
   const browser = await puppeteer.launch({
+    executablePath: '/usr/bin/google-chrome',
     // https://github.com/buildkite/docker-puppeteer/blob/master/example/integration-tests/index.test.js
     args: [
       '--no-sandbox',

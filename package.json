@@ -6,6 +6,6 @@
   },
   "dependencies": {
     "fastify": "^3.14.0",
-    "puppeteer-core": "^8.0.0"
+    "puppeteer-core": "8.0.0"
   }
 }
