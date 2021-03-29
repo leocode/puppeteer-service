@@ -71,3 +71,16 @@ yarn start
 ```
 
 Start container with API. Wait until logs from server appear (due to one-line command `docker build` output is muted). It may take up to few minutes. Consecutive starts (after code change) should be faster.
+
+### Versioning
+
+We use semver for versioning. Release should be tagged, so it can be installed with URL.
+
+
+### TODO
+
+Generating JPG screenshots makes no sense since it's not good for displaying text
+
+1. HTML - PNG
+2. URL - PDF
+3. URL - PNG
