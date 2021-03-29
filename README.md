@@ -2,7 +2,19 @@
 
 Containerized Puppeteer which allows to render images and PDFs of given webpage or HTML code
 
-## Installation
+## Quick start - start container, convert HTML to PDF
+
+For production: **Remember to change tag `main` to a version tag to lock the version**
+
+```sh
+docker build -t pup-test https://github.com/leocode/puppeteer-service.git#main
+
+docker run -it --rm -p 3000:3000 pup-test
+
+curl -d '{"html":"<strong>Hello world</strong>"}' -H "Content-Type: application/json" -X POST http://localhost:3000/html/pdf > hello-world.pdf
+```
+
+## Container installation
 
 We don't have Docker public repository, however image can be build locally using git url.
 
