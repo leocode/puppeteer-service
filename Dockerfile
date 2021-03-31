@@ -6,7 +6,7 @@ RUN  apt-get update \
      && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
      && apt-get update \
      # Install google chrome and all its deps (used by puppeteer)
-     && apt-get install -y google-chrome-stable=89.0.4389.90-1 \
+     && apt-get install -y google-chrome-stable \
      && rm -rf /var/lib/apt/lists/* \
      && wget --quiet https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -O /usr/sbin/wait-for-it.sh \
      && chmod +x /usr/sbin/wait-for-it.sh
