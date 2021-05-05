@@ -1,6 +1,6 @@
 const { config } = require('./config');
-const { htmlToPdf } = require('./puppeteer');
-const { htmlPdfRequest } = require('./schemas');
+const { htmlToPdf, urlToPng } = require('./puppeteer');
+const { htmlPdfRequest, urlPngRequest } = require('./schemas');
 
 const fastify = require('fastify')({
   logger: true,
@@ -10,6 +10,13 @@ fastify.post('/html/pdf', htmlPdfRequest, async (request) => {
   const html = request.body.html;
 
   return htmlToPdf(html);
+});
+
+fastify.post('/url/png', urlPngRequest, async (request) => {
+  const url = request.body.url;
+  const viewport = request.body.viewport;
+
+  return urlToPng(url, viewport);
 });
 
 (async () => {

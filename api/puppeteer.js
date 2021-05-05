@@ -27,6 +27,17 @@ const htmlToPdf = async (html) => {
   })
 }
 
+const urlToPng = async (url, viewport) => {
+  return await inBrowser(async browser => {
+    const page = await browser.newPage();
+    await page.goto(url);
+    await page.setViewport(viewport);
+
+    return await page.screenshot({ type: 'png' });
+  })
+}
+
 module.exports = {
   htmlToPdf,
+  urlToPng,
 }
