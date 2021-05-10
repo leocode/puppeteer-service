@@ -61,6 +61,33 @@ content-type: application/octet-stream
 <binary>
 ```
 
+### URL to PNG
+
+**Method**: `POST`
+
+**URL**: `/url/png`
+
+**Body**
+
+```json
+{
+  "url": "https://www.wikipedia.org/",
+  "viewport": {
+    "width": 1024,
+    "height": 768
+  }
+}
+```
+
+**Response**
+
+```
+HTTP/1.1 200 OK
+content-type: application/octet-stream
+
+<binary>
+```
+
 ## Development
 
 Dependencies:
