@@ -4,10 +4,10 @@ Containerized Puppeteer which allows to render images and PDFs of given webpage 
 
 ## Quick start - start container, convert HTML to PDF
 
-For production: **Remember to change tag `main` to a version tag to lock the version**
+For production: **Remember to select precise version tag for the image (e.g. leocode/puppeteer-service:1.1.0)**
 
 ```sh
-docker build -t pup-test https://github.com/leocode/puppeteer-service.git#main
+docker build -t pup-test leocode/puppeteer-service
 
 docker run -it --rm -p 3000:3000 pup-test
 
@@ -16,12 +16,12 @@ curl -d '{"html":"<strong>Hello world</strong>"}' -H "Content-Type: application/
 
 ## Container installation
 
-We don't have Docker public repository, however image can be build locally using git url.
+**Remember to select precise version tag for the image (e.g. leocode/puppeteer-service:1.1.0)**
 
-**Remember to change tag `main` to a version tag to lock the version**
+Default `latest` tag is built out of master, which means it is cutting-edge version.
 
 ```
-docker build https://github.com/leocode/puppeteer-service.git#main
+docker build leocode/puppeteer-service
 ```
 
 The same can be used for docker-compose:
@@ -29,14 +29,14 @@ The same can be used for docker-compose:
 ```yaml
 services:
   puppeteer:
-    build: https://github.com/leocode/puppeteer-service.git#main
+    build: leocode/puppeteer-service
 ```
 
 ## Documentation
 
 Starting container automatically starts API server.
 
-It listens on port 3000
+It listens on port 3000.
 
 ### HTML to PDF
 
@@ -101,5 +101,5 @@ Start container with API. Wait until logs from server appear (due to one-line co
 
 ### Versioning
 
-We use semver for versioning. Release should be tagged, so it can be installed with URL.
+We use semver for versioning. Release should be tagged with vX.Y.Z, so the version is picked up by Docker Hub autobuild.
 
