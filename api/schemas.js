@@ -1,3 +1,12 @@
+const viewport = {
+  type: 'object',
+  required: ['width', 'height'],
+  properties: {
+    width: { type: 'number' },
+    height: { type: 'number' }
+  }
+};
+
 const htmlPdfRequest = {
   schema: {
     body: {
@@ -5,14 +14,19 @@ const htmlPdfRequest = {
       required: ['html'],
       properties: {
         html: { type: 'string' },
-        viewport: {
-          type: 'object',
-          required: ['width', 'height'],
-          properties: {
-            width: { type: 'number' },
-            height: { type: 'number' }
-          }
-        }
+      }
+    }
+  }
+}
+
+const htmlPngRequest = {
+  schema: {
+    body: {
+      type: 'object',
+      required: ['html', 'viewport'],
+      properties: {
+        html: { type: 'string' },
+        viewport,
       }
     }
   }
@@ -25,14 +39,19 @@ const urlPngRequest = {
       required: ['url', 'viewport'],
       properties: {
         url: { type: 'string' },
-        viewport: {
-          type: 'object',
-          required: ['width', 'height'],
-          properties: {
-            width: { type: 'number' },
-            height: { type: 'number' }
-          }
-        }
+        viewport,
+      }
+    }
+  }
+}
+
+const urlPdfRequest = {
+  schema: {
+    body: {
+      type: 'object',
+      required: ['url'],
+      properties: {
+        url: { type: 'string' },
       }
     }
   }
@@ -40,5 +59,7 @@ const urlPngRequest = {
 
 module.exports = {
   htmlPdfRequest,
-  urlPngRequest
+  htmlPngRequest,
+  urlPngRequest,
+  urlPdfRequest,
 }
