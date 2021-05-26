@@ -27,6 +27,16 @@ const htmlToPdf = async (html) => {
   })
 }
 
+const htmlToPng = async (html, viewport) => {
+  return await inBrowser(async browser => {
+    const page = await browser.newPage();
+    await page.setContent(html);
+    await page.setViewport(viewport);
+
+    return await page.screenshot({ type: 'png' });
+  })
+}
+
 const urlToPng = async (url, viewport) => {
   return await inBrowser(async browser => {
     const page = await browser.newPage();
@@ -37,7 +47,18 @@ const urlToPng = async (url, viewport) => {
   })
 }
 
+const urlToPdf = async (url) => {
+  return await inBrowser(async browser => {
+    const page = await browser.newPage();
+    await page.goto(url);
+
+    return await page.pdf({ format: 'A4', printBackground: true });
+  })
+}
+
 module.exports = {
   htmlToPdf,
+  htmlToPng,
   urlToPng,
+  urlToPdf,
 }

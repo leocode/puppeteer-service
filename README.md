@@ -61,6 +61,56 @@ content-type: application/octet-stream
 <binary>
 ```
 
+### HTML to PNG
+
+**Method**: `POST`
+
+**URL**: `/html/png`
+
+**Body**
+
+```json
+{
+  "html": "<html><head><style></style></head><body>Content</body></html>",
+  "viewport": {
+    "width": 1024,
+    "height": 768
+  }
+}
+```
+
+**Response**
+
+```
+HTTP/1.1 200 OK
+content-type: application/octet-stream
+
+<binary>
+```
+
+### URL to PDF
+
+**Method**: `POST`
+
+**URL**: `/url/pdf`
+
+**Body**
+
+```json
+{
+  "url": "https://www.wikipedia.org/"
+}
+```
+
+**Response**
+
+```
+HTTP/1.1 200 OK
+content-type: application/octet-stream
+
+<binary>
+```
+
 ### URL to PNG
 
 **Method**: `POST`
