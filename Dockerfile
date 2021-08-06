@@ -1,5 +1,5 @@
 # Based losely on https://github.com/buildkite/docker-puppeteer/blob/4daef288cf620a87765733192d2deb72ff29d1b4/Dockerfile
-FROM node:14.16.0-buster-slim@sha256:ffc15488e56d99dbc9b90d496aaf47901c6a940c077bc542f675ae351e769a12
+FROM node:14.16.0-buster-slim@sha256:ffc15488e56d99dbc9b90d496aaf47901c6a940c077bc542f675ae351e769a12 as install
 RUN  apt-get update \
      && apt-get install -y wget gnupg ca-certificates procps libxss1 \
      && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -18,8 +18,27 @@ WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
 
-RUN yarn install --frozen-lockfile && yarn cache clean
+FROM install as build
 
 COPY . .
 
-CMD node api/index.js
+RUN yarn install --frozen-lockfile && yarn cache clean
+
+RUN yarn build
+
+FROM node:14.16.0-buster-slim@sha256:ffc15488e56d99dbc9b90d496aaf47901c6a940c077bc542f675ae351e769a12 as production-build
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+COPY package.json ./
+COPY yarn.lock ./
+
+COPY --from=build /app/build /app/build
+
+RUN yarn install --frozen-lockfile --production && yarn cache clean
+
+EXPOSE 3000
+
+CMD node build/index.js
