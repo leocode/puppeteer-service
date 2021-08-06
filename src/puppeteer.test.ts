@@ -16,7 +16,7 @@ describe('Puppeteer Service', () => {
       height: 200,
       width: 200,
     })) as Buffer;
-    await fs.promises.writeFile('expected-html.png', result);
+
     const differentPixels = pixelmatch(
       await getExpectedImage(),
       result,

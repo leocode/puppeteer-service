@@ -30,4 +30,4 @@ jobs:
       - name: Build
         run: yarn build
       - name: Run unit tests
-        run: yarn expected-html.png
+        run: yarn test
