@@ -6,7 +6,7 @@ import path from 'path';
 process.env.CHROME_BINARY_PATH = require('chromium-binary').path;
 
 const TEST_HTML = '<html><div>Test</div></html>';
-const TEST_HTML_URL = 'test/test.html';
+const TEST_HTML_URL = 'test/resources/test.html';
 
 const COMPARISON_THRESHOLD = 0.1;
 
@@ -54,10 +54,10 @@ describe('Puppeteer Service', () => {
 });
 
 const getBufferDimensions = (bufferLength: number) =>
-  Math.sqrt(bufferLength / 4);
+  Math.round(Math.sqrt(bufferLength / 4));
 
 async function getExpectedImage() {
-  const EXPECTED_PNG_FROM_TEST_HTML = 'test/expected-html.png';
+  const EXPECTED_PNG_FROM_TEST_HTML = 'test/resources/expected-html.png';
 
   return await fs.promises.readFile(EXPECTED_PNG_FROM_TEST_HTML);
 }
