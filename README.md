@@ -7,9 +7,9 @@ Containerized Puppeteer which allows to render images and PDFs of given webpage 
 For production: **Remember to select precise version tag for the image (e.g. leocode/puppeteer-service:1.1.0)**
 
 ```sh
-docker build -t pup-test leocode/puppeteer-service
+docker build -t pup-expected-html.png leocode/puppeteer-service
 
-docker run -it --rm -p 3000:3000 pup-test
+docker run -it --rm -p 3000:3000 pup-expected-html.png
 
 curl -d '{"html":"<strong>Hello world</strong>"}' -H "Content-Type: application/json" -X POST http://localhost:3000/html/pdf > hello-world.pdf
 ```

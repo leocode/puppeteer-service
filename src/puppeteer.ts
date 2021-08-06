@@ -1,9 +1,10 @@
 import type { Browser, Viewport } from 'puppeteer-core';
 import puppeteer from 'puppeteer-core';
+import { config } from './config';
 
-export const inBrowser = async <T>(callback: (browser: Browser) => T) => {
+const inBrowser = async <T>(callback: (browser: Browser) => T) => {
   const browser = await puppeteer.launch({
-    executablePath: '/usr/bin/google-chrome',
+    executablePath: config().chromeBinaryPath,
     // https://github.com/buildkite/docker-puppeteer/blob/master/example/integration-tests/index.test.js
     args: [
       '--no-sandbox',
