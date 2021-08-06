@@ -1,25 +1,25 @@
-const viewport = {
+export const viewport = {
   type: 'object',
   required: ['width', 'height'],
   properties: {
     width: { type: 'number' },
-    height: { type: 'number' }
-  }
+    height: { type: 'number' },
+  },
 };
 
-const htmlPdfRequest = {
+export const htmlPdfRequest = {
   schema: {
     body: {
       type: 'object',
       required: ['html'],
       properties: {
         html: { type: 'string' },
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
-const htmlPngRequest = {
+export const htmlPngRequest = {
   schema: {
     body: {
       type: 'object',
@@ -27,12 +27,12 @@ const htmlPngRequest = {
       properties: {
         html: { type: 'string' },
         viewport,
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
-const urlPngRequest = {
+export const urlPngRequest = {
   schema: {
     body: {
       type: 'object',
@@ -40,26 +40,19 @@ const urlPngRequest = {
       properties: {
         url: { type: 'string' },
         viewport,
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
-const urlPdfRequest = {
+export const urlPdfRequest = {
   schema: {
     body: {
       type: 'object',
       required: ['url'],
       properties: {
         url: { type: 'string' },
-      }
-    }
-  }
-}
-
-module.exports = {
-  htmlPdfRequest,
-  htmlPngRequest,
-  urlPngRequest,
-  urlPdfRequest,
-}
+      },
+    },
+  },
+};
