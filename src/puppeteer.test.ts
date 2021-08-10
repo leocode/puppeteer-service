@@ -3,6 +3,7 @@ import Jimp from 'jimp';
 import path from 'path';
 import fs from 'fs';
 import pdf from 'pdf-parse';
+import { Environment } from './config';
 
 process.env.CHROME_BINARY_PATH = require('chromium-binary').path;
 
@@ -65,5 +66,15 @@ describe('Puppeteer Service', () => {
 
     const actualPdfContent = await pdf(result);
     expect(actualPdfContent.text).toEqual(expectedPdfContent.text);
+  });
+
+  it('should not visit local urls', async () => {
+    const url = `file://${path.resolve(TEST_HTML_URL)}`;
+
+    await expect(async () => {
+      process.env.NODE_ENV = Environment.PRODUCTION;
+      await urlToPng(url, { height: 1, width: 1 });
+      process.env.NODE_ENV = Environment.TEST;
+    }).rejects.toThrow();
   });
 });
