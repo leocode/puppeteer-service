@@ -11,7 +11,6 @@ const inBrowser = async <T>(callback: (browser: Browser) => T) => {
       '--no-sandbox',
       '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
-      '--url-blacklist=*',
     ],
   });
 
