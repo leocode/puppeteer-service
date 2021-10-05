@@ -3,7 +3,7 @@ import Jimp from 'jimp';
 import path from 'path';
 import fs from 'fs';
 import pdf from 'pdf-parse';
-import { RejectingFileProtocolUrls } from './config';
+import { config } from './config';
 
 process.env.CHROME_BINARY_PATH = require('chromium-binary').path;
 
@@ -15,7 +15,7 @@ const EXPECTED_PDF_FROM_TEST_HTML = 'test/resources/expected.pdf';
 const COMPARISON_THRESHOLD = 0.1;
 
 describe('Puppeteer Service', () => {
-  process.env.REJECT_FILE_PROTOCOL_URLS = RejectingFileProtocolUrls.Disabled;
+  config.rejectFileProtocolUrls = false;
 
   it('should convert html to png', async () => {
     const convertedPng = (await htmlToPng(TEST_HTML, {
@@ -74,9 +74,9 @@ describe('Puppeteer Service', () => {
     const url = `file://${path.resolve(TEST_HTML_URL)}`;
 
     await expect(async () => {
-      process.env.REJECT_FILE_PROTOCOL_URLS = RejectingFileProtocolUrls.Enabled;
+      config.rejectFileProtocolUrls = true;
       await urlToPng(url, { height: 1, width: 1 });
-      process.env.REJECT_FILE_PROTOCOL_URLS = RejectingFileProtocolUrls.Disabled;
     }).rejects.toThrow();
+    config.rejectFileProtocolUrls = false;
   });
 });

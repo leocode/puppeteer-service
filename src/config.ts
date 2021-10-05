@@ -1,13 +1,14 @@
-export const config = () => ({
+const parseConfig = () => ({
   port: 3000,
   chromeBinaryPath: process.env.CHROME_BINARY_PATH ?? '/usr/bin/google-chrome',
-  rejectFileProtocolUrls: !!(parseInt(
+  rejectFileProtocolUrls: Boolean(Number(
     process.env.REJECT_FILE_PROTOCOL_URLS ?? RejectingFileProtocolUrls.Enabled,
-    10,
   )),
 });
 
-export enum RejectingFileProtocolUrls {
+enum RejectingFileProtocolUrls {
   Enabled = '1',
   Disabled = '0',
 }
+
+export const config = parseConfig();
