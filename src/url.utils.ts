@@ -1,7 +1,8 @@
 import { config } from './config';
 
 export const validateUrl = (url: string) => {
-  if (config().isTestEnvironment) {
+  const x = config();
+  if (!x.rejectFileProtocolUrls) {
     return;
   }
 
