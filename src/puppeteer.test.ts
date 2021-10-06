@@ -17,6 +17,8 @@ const COMPARISON_THRESHOLD = 0.1;
 describe('Puppeteer Service', () => {
   config.rejectFileProtocolUrls = false;
 
+  beforeAll(() => jest.setTimeout(6000));
+
   it('should convert html to png', async () => {
     const convertedPng = (await htmlToPng(TEST_HTML, {
       height: 200,
