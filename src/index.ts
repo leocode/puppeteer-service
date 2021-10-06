@@ -53,9 +53,9 @@ server.post<{ Body: { url: string } }>('/url/pdf', urlPdfRequest, (request) => {
 
 const startServer = async () => {
   try {
-    await server.listen(config().port, '0.0.0.0');
+    await server.listen(config.port, '0.0.0.0');
 
-    server.log.info(`Puppeteer service API listening on ${config().port}`);
+    server.log.info(`Puppeteer service API listening on ${config.port}`);
   } catch (err: unknown) {
     server.log.error(err);
     process.exit(1);

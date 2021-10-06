@@ -1,10 +1,11 @@
 import type { Browser, Viewport } from 'puppeteer-core';
 import puppeteer from 'puppeteer-core';
 import { config } from './config';
+import { validateUrl } from './url.utils';
 
 const inBrowser = async <T>(callback: (browser: Browser) => T) => {
   const browser = await puppeteer.launch({
-    executablePath: config().chromeBinaryPath,
+    executablePath: config.chromeBinaryPath,
     // https://github.com/buildkite/docker-puppeteer/blob/master/example/integration-tests/index.test.js
     args: [
       '--no-sandbox',
@@ -40,6 +41,8 @@ export const htmlToPng = async (html: string, viewport: Viewport) => {
 };
 
 export const urlToPng = async (url: string, viewport: Viewport) => {
+  validateUrl(url);
+
   return await inBrowser(async (browser) => {
     const page = await browser.newPage();
     await page.goto(url);
@@ -50,6 +53,8 @@ export const urlToPng = async (url: string, viewport: Viewport) => {
 };
 
 export const urlToPdf = async (url: string) => {
+  validateUrl(url);
+
   return await inBrowser(async (browser) => {
     const page = await browser.newPage();
     await page.goto(url);

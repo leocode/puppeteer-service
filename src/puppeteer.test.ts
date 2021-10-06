@@ -3,6 +3,7 @@ import Jimp from 'jimp';
 import path from 'path';
 import fs from 'fs';
 import pdf from 'pdf-parse';
+import { config } from './config';
 
 process.env.CHROME_BINARY_PATH = require('chromium-binary').path;
 
@@ -14,6 +15,10 @@ const EXPECTED_PDF_FROM_TEST_HTML = 'test/resources/expected.pdf';
 const COMPARISON_THRESHOLD = 0.1;
 
 describe('Puppeteer Service', () => {
+  config.rejectFileProtocolUrls = false;
+
+  beforeAll(() => jest.setTimeout(6000));
+
   it('should convert html to png', async () => {
     const convertedPng = (await htmlToPng(TEST_HTML, {
       height: 200,
@@ -65,5 +70,15 @@ describe('Puppeteer Service', () => {
 
     const actualPdfContent = await pdf(result);
     expect(actualPdfContent.text).toEqual(expectedPdfContent.text);
+  });
+
+  it('should not visit local urls', async () => {
+    const url = `file://${path.resolve(TEST_HTML_URL)}`;
+
+    await expect(async () => {
+      config.rejectFileProtocolUrls = true;
+      await urlToPng(url, { height: 1, width: 1 });
+    }).rejects.toThrow();
+    config.rejectFileProtocolUrls = false;
   });
 });
