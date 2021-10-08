@@ -30,4 +30,4 @@ jobs:
           push: true
           tags: |
             leocode/puppeteer-service:latest
-            leocode/puppeteer-service:${{ NEW_IMAGE_VERSION }}
+            leocode/puppeteer-service:${{ env.NEW_IMAGE_VERSION }}
