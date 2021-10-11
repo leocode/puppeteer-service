@@ -44,6 +44,6 @@ jobs:
         with:
           persist-credentials: false
       - name: Run semantic release
-        run: npx semantic-release
+        run: npx semantic-release@18
         env:
           GITHUB_TOKEN: ${{ secrets.GH_DEPLOYMENT_TOKEN }}
