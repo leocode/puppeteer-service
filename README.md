@@ -18,10 +18,8 @@ curl -d '{"html":"<strong>Hello world</strong>"}' -H "Content-Type: application/
 
 **Remember to select precise version tag for the image (e.g. leocode/puppeteer-service:1.1.0)**
 
-Default `latest` tag is built out of master, which means it is cutting-edge version.
-
 ```
-docker build leocode/puppeteer-service
+docker run leocode/puppeteer-service
 ```
 
 The same can be used for docker-compose:
@@ -144,10 +142,16 @@ Dependencies:
 - Docker
 
 ```
-yarn start
+yarn start:dev
 ```
 
 Start container with API. Wait until logs from server appear (due to one-line command `docker build` output is muted). It may take up to few minutes. Consecutive starts (after code change) should be faster.
+
+You can test production build using
+
+```
+yarn start:prod
+```
 
 ### Versioning
 

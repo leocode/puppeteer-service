@@ -20,20 +20,19 @@ COPY yarn.lock .
 
 FROM install as build
 
-COPY . .
-
 RUN yarn install --frozen-lockfile && yarn cache clean
+
+COPY . .
 
 RUN yarn build
 
-FROM node:14.16.0-buster-slim@sha256:ffc15488e56d99dbc9b90d496aaf47901c6a940c077bc542f675ae351e769a12 as production-build
+CMD node build/index.js
+
+FROM install as production-build
 
 WORKDIR /app
 
 ENV NODE_ENV=production
-
-COPY package.json ./
-COPY yarn.lock ./
 
 COPY --from=build /app/build /app/build
 
