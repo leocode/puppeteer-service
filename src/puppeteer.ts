@@ -58,7 +58,16 @@ export const urlToPdf = async (url: string) => {
   return await inBrowser(async (browser) => {
     const page = await browser.newPage();
     await page.goto(url);
+    await page.setViewport({ width: 1200, height: 1000 });
+    await page.waitForTimeout(1500);
 
-    return await page.pdf({ format: 'a4', printBackground: true });
+    await page.emulateMediaType('screen');
+
+    const pageHeight = await page.evaluate(() => {
+      // @ts-ignore
+      return document.querySelector('.cv-wrapper').offsetHeight;
+    });
+
+    return await page.pdf({ width: 1200, height: `${pageHeight}px`, printBackground: true });
   });
 };
