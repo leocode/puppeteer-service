@@ -2,7 +2,8 @@
   "name": "puppeteer-service",
   "version": "1.0.0",
   "scripts": {
-    "start": "docker run --rm -it -p 3000:3000 $(docker build -q .)",
+    "start:dev": "docker run --rm -it -p 3000:3000 $(docker build --target build -q .)",
+    "start:prod": "docker run --rm -it -p 3000:3000 $(docker build -q .)",
     "start:local": "node build/index.js",
     "build": "tsc",
     "test": "jest",
