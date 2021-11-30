@@ -27,7 +27,7 @@ The same can be used for docker-compose:
 ```yaml
 services:
   puppeteer:
-    build: leocode/puppeteer-service
+    image: leocode/puppeteer-service
 ```
 
 ## Documentation
@@ -139,6 +139,7 @@ content-type: application/octet-stream
 ## Development
 
 Dependencies:
+
 - Docker
 
 ```
@@ -156,4 +157,3 @@ yarn start:prod
 ### Versioning
 
 We use semver for versioning. Release should be tagged with vX.Y.Z, so the version is picked up by Docker Hub autobuild.
-
